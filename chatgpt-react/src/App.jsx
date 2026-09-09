@@ -660,29 +660,76 @@ import Profile from "./component/Profile.jsx";
 
 
 //services page(structure)
-import {getproducts, createpost, deletepost} from "./services/productservice.jsx";
+// import {getproducts, createpost, deletepost} from "./services/productservice.jsx";
 
-function App(){
+// function App(){
 
-  const getprod = async() => {
-    const data= await getproducts();
-    console.log(data);
-  }
-  const create= async() => {
-    const data= await createpost();
-    console.log(data);
-  }
-  const del = async() => {
-    const data= await deletepost(1);
-    console.log(data);
-  }
-  return(
-    <div>
-      <button onClick={getprod}>Getproducts</button>
-      <button onClick={create}>Createpost</button>
-      <button onClick={del }>Deletepost</button>
-    </div>
+//   const getprod = async() => {
+//     const data= await getproducts();
+//     console.log(data);
+//   }
+//   const create= async() => {
+//     const data= await createpost();
+//     console.log(data);
+//   }
+//   const del = async() => {
+//     const data= await deletepost(1);
+//     console.log(data);
+//   }
+//   return(
+//     <div>
+//       <button onClick={getprod}>Getproducts</button>
+//       <button onClick={create}>Createpost</button>
+//       <button onClick={del }>Deletepost</button>
+//     </div>
 
-  )
+//   )
+// }
+// export default App;
+
+
+
+
+//custom hooks
+// import useApi from "./services/useApi.js";
+// import {getproducts, createpost, deletepost} from "./services/productservice.jsx";
+// function App(){
+//   const { data, loading, error, execute } = useApi(getproducts);
+//   useEffect(()=>{
+//     execute();
+//   }, [])
+//   return (
+//     <div>
+//       <h1>Products</h1>
+
+//       {loading && <p>Loading...</p>}
+
+//       {error && <p>{error}</p>}
+
+//       {data?.map((product) => (
+//         <p key={product.id}>{product.title}</p>
+//       ))}
+//     </div>
+//   );
+// }
+// export default App;
+
+
+
+
+//errorboundaries
+import ErrorBoundary from "./services/ErrorBoundary";
+
+function BrokenComponent() {
+  throw new Error("Component crashed!");
 }
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <BrokenComponent />
+    </ErrorBoundary>
+  );
+}
+
 export default App;
